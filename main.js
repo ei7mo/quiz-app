@@ -1,148 +1,140 @@
-let categorySpan = document.querySelector(".category span");
-let countSpan = document.querySelector(".count span");
-let quizArea = document.querySelector(".quiz-area");
-let options = document.querySelector(".options");
-let submitBtn = document.querySelector(".submit-btn");
-let spansDiv = document.querySelector(".bullets .spans");
-let countdownDiv = document.querySelector(".bullets .countdown");
-let result = document.querySelector(".result");
-
+// DOM element references
+const popup = document.querySelector(".popup");
+const categoryButtons = document.querySelectorAll(".popup .popup-content button");
+const categorySpan = document.querySelector(".category span");
+const countSpan = document.querySelector(".count span");
+const quizArea = document.querySelector(".quiz-area");
+const options = document.querySelector(".options");
+const submitBtn = document.querySelector(".submit-btn");
+const spansDiv = document.querySelector(".bullets .spans");
+const countdownDiv = document.querySelector(".bullets .countdown");
+const result = document.querySelector(".result");
+// Quiz state
+let category;
 let questionNumber = 0;
 let countdownInterval;
 let rightAnswers = 0;
-
-function getQuestions() {
-  let myRequest = new XMLHttpRequest();
-
-  myRequest.onreadystatechange = function () {
-    if (this.readyState === 4 && this.status === 200) {
-      let questions = JSON.parse(this.responseText);
-      let qCount = questions.length;
-
-      categorySpan.innerHTML = "HTML";
-      countSpan.innerHTML = qCount;
-
-      addQuestionData(questions[questionNumber], qCount);
-
-      createBullets(qCount);
-
-      countdown(11, qCount);
-
-      submitBtn.onclick = () => {
+// Open the quiz for the selected category and close the popup
+categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        category = button.dataset.category;
+        categorySpan.textContent = category;
+        getQuestions(category);
+        popup.remove();
+    });
+});
+// Fetch questions from the corresponding JSON file based on the selected category
+async function getQuestions(category) {
+    const response = await fetch(`json/${category}_q.json`);
+    const questions = await response.json();
+    let questionsCount = questions.length;
+    countSpan.textContent = questionsCount.toString();
+    // Guard against out-of-bounds before rendering the first question
+    if (questionNumber < questionsCount) {
+        addQuestionData(questions[questionNumber], questionsCount);
+    }
+    createBullets(questions.length);
+    countdown(11, questions.length);
+    // Handle submit — check answer, load next question, restart countdown
+    submitBtn.onclick = () => {
         let rightAnswer = questions[questionNumber].right_answer;
-
         questionNumber++;
-
-        checkAnswer(rightAnswer, qCount);
-
+        checkAnswer(rightAnswer, questions.length);
+        // Clear current question UI before loading the next one
         document.querySelector(".quiz-area h2")?.remove();
-        options.innerHTML = "";
-
-        addQuestionData(questions[questionNumber], qCount);
-
+        options.textContent = "";
+        // Guard against out-of-bounds before rendering the next question
+        if (questionNumber < questionsCount) {
+            addQuestionData(questions[questionNumber], questionsCount);
+        }
         handleBullets();
-
         clearInterval(countdownInterval);
-        countdown(11, qCount);
-
-        showResults(qCount);
-      };
-    }
-  };
-  myRequest.open("GET", "questions.json", true);
-  myRequest.send();
+        countdown(11, questionsCount);
+        showResults(questionsCount);
+    };
 }
-
-getQuestions();
-
-function addQuestionData(obj, count) {
-  if (questionNumber < count) {
-    let questionTitle = document.createElement("h2");
-    let questionText = obj["title"];
-
-    questionTitle.innerHTML = questionText;
-    options.before(questionTitle);
-
-    for (let i = 1; i <= 4; i++) {
-      let option = document.createElement("div");
-      let optionText = obj[`answer_${i}`];
-
-      option.className = "option";
-      option.innerHTML = optionText;
-      options.appendChild(option);
-
-      option.addEventListener("click", function () {
-        let allOpt = document.querySelectorAll(".option");
-
-        allOpt.forEach((opt) => {
-          opt.classList.remove("selected");
-        });
-
-        option.classList.add("selected");
-      });
+// Render the current question title and its four answer options
+function addQuestionData(question, totalQuestions) {
+    if (questionNumber < totalQuestions) {
+        let questionTitle = document.createElement("h2");
+        let questionText = question["title"];
+        questionTitle.textContent = questionText;
+        options.before(questionTitle);
+        for (let i = 1; i <= 4; i++) {
+            let option = document.createElement("div");
+            let optionText = question[`answer_${i}`];
+            option.className = "option";
+            option.textContent = optionText;
+            options.appendChild(option);
+            // Highlight the clicked option and deselect others
+            option.addEventListener("click", () => {
+                let allOptions = document.querySelectorAll(".option");
+                allOptions.forEach((opt) => {
+                    opt.classList.remove("selected");
+                });
+                option.classList.add("selected");
+            });
+        }
     }
-  }
 }
-
+// Create a bullet indicator for each question to track progress
 function createBullets(count) {
-  for (let i = 0; i < count; i++) {
-    let bullet = document.createElement("span");
-
-    spansDiv.appendChild(bullet);
-
-    if (i === 0) {
-      bullet.className = "active";
+    for (let i = 0; i < count; i++) {
+        let bullet = document.createElement("span");
+        spansDiv.appendChild(bullet);
+        // Mark the first bullet as active on start
+        if (i === 0) {
+            bullet.className = "active";
+        }
     }
-  }
 }
-
+// Start a countdown timer — auto-submits when time runs out
 function countdown(duration, count) {
-  if (questionNumber < count) {
-    countdownInterval = setInterval(() => {
-      countdownDiv.innerHTML = `${--duration}`;
-
-      if (duration <= 0) {
-        clearInterval(countdownInterval);
-        submitBtn.click();
-      }
-    }, 1000);
-  }
-}
-
-function checkAnswer(rAnswer, count) {
-  let answers = document.querySelectorAll(".option");
-  let selectedAnswer;
-
-  for (let i = 0; i < answers.length; i++) {
-    if (answers[i].classList.contains("selected")) {
-      selectedAnswer = answers[i].innerHTML;
+    if (questionNumber < count) {
+        countdownInterval = setInterval(() => {
+            countdownDiv.textContent = `${--duration}`;
+            if (duration <= 0) {
+                clearInterval(countdownInterval);
+                submitBtn.click();
+            }
+        }, 1000);
     }
-  }
-  if (selectedAnswer === rAnswer) {
-    rightAnswers++;
-  }
 }
-
+// Compare the selected answer against the correct one and update the score
+function checkAnswer(rightAnswer, count) {
+    let answers = document.querySelectorAll(".option");
+    let selectedAnswer = "";
+    for (let i = 0; i < answers.length; i++) {
+        if (answers[i].classList.contains("selected")) {
+            selectedAnswer = answers[i].textContent;
+        }
+    }
+    if (selectedAnswer === rightAnswer) {
+        rightAnswers++;
+    }
+}
+// Move the active bullet to the current question index
 function handleBullets() {
-  let bullets = document.querySelectorAll(".bullets .spans span");
-
-  for (let i = 0; i < bullets.length; i++) {
-    if (i === questionNumber) {
-      bullets[i].className = "active";
+    let bullets = document.querySelectorAll(".bullets .spans span");
+    for (let i = 0; i < bullets.length; i++) {
+        if (i === questionNumber) {
+            bullets[i].classList.add("active");
+        }
     }
-  }
 }
-
+// Show the final score once all questions are answered
 function showResults(count) {
-  if (questionNumber === count) {
-    quizArea.remove();
-    submitBtn.remove();
-    spansDiv.remove();
-    countdownDiv.remove();
-    document.querySelector(".bullets").remove();
-
-    result.style.display = "block";
-    document.querySelector(".result span").innerHTML =
-      `${rightAnswers} out of ${count}`;
-  }
+    if (questionNumber === count) {
+        // Remove quiz UI elements
+        quizArea.remove();
+        submitBtn.remove();
+        spansDiv.remove();
+        countdownDiv.remove();
+        document.querySelector(".bullets")?.remove();
+        // Display the result screen with the final score
+        result.style.display = "block";
+        document.querySelector(".result span").textContent =
+            `${rightAnswers} out of ${count}`;
+    }
 }
+export {};
