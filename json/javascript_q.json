@@ -1,0 +1,82 @@
+[
+  {
+    "title": "What Does typeof null Return In JavaScript",
+    "answer_1": "null",
+    "answer_2": "undefined",
+    "answer_3": "object",
+    "answer_4": "string",
+    "right_answer": "object"
+  },
+  {
+    "title": "Which Method Removes The Last Element From An Array And Returns It",
+    "answer_1": "shift()",
+    "answer_2": "pop()",
+    "answer_3": "splice()",
+    "answer_4": "slice()",
+    "right_answer": "pop()"
+  },
+  {
+    "title": "What Is The Output Of 0.1 + 0.2 === 0.3 In JavaScript",
+    "answer_1": "true",
+    "answer_2": "false",
+    "answer_3": "undefined",
+    "answer_4": "NaN",
+    "right_answer": "false"
+  },
+  {
+    "title": "Which Keyword Declares A Block-Scoped Variable",
+    "answer_1": "var",
+    "answer_2": "let",
+    "answer_3": "define",
+    "answer_4": "static",
+    "right_answer": "let"
+  },
+  {
+    "title": "What Does The === Operator Check",
+    "answer_1": "Value Only",
+    "answer_2": "Type Only",
+    "answer_3": "Value And Type",
+    "answer_4": "Reference Equality",
+    "right_answer": "Value And Type"
+  },
+  {
+    "title": "What Will console.log(typeof []) Output",
+    "answer_1": "array",
+    "answer_2": "list",
+    "answer_3": "object",
+    "answer_4": "undefined",
+    "right_answer": "object"
+  },
+  {
+    "title": "Which Of The Following Is NOT A JavaScript Data Type",
+    "answer_1": "Symbol",
+    "answer_2": "BigInt",
+    "answer_3": "Float",
+    "answer_4": "Boolean",
+    "right_answer": "Float"
+  },
+  {
+    "title": "What Does The Spread Operator ... Do In JavaScript",
+    "answer_1": "Deletes Array Elements",
+    "answer_2": "Expands An Iterable Into Individual Elements",
+    "answer_3": "Creates A Deep Copy Only",
+    "answer_4": "Merges Two Functions",
+    "right_answer": "Expands An Iterable Into Individual Elements"
+  },
+  {
+    "title": "What Is A Closure In JavaScript",
+    "answer_1": "A Way To Close The Browser Tab",
+    "answer_2": "A Method To Terminate A Loop",
+    "answer_3": "A Function That Can Access Its Outer Scope Variables After The Outer Function Returns",
+    "answer_4": "A Built-In Error Handler",
+    "right_answer": "A Function That Can Access Its Outer Scope Variables After The Outer Function Returns"
+  },
+  {
+    "title": "What Does Array.isArray([]) Return",
+    "answer_1": "false",
+    "answer_2": "array",
+    "answer_3": "undefined",
+    "answer_4": "true",
+    "right_answer": "true"
+  }
+]
