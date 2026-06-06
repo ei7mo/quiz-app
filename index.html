@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <div class="popup">
+      <div class="popup-content">
+        <p>What category do you want to take the quiz for?</p>
+        <button id="html" data-category="HTML">HTML</button>
+        <button id="css" data-category="CSS">CSS</button>
+        <button id="javascript" data-category="JavaScript">JavaScript</button>
+      </div>
+    </div>
     <div class="quiz-app">
       <div class="quiz-info">
         <div class="category">Category: <span></span></div>
@@ -22,6 +30,6 @@
       </div>
       <div class="result">Right: <span></span></div>
     </div>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
