@@ -63,16 +63,17 @@ function addQuestionData(question, totalQuestions) {
         for (let i = 1; i <= 4; i++) {
             let option = document.createElement("div");
             let optionText = question[`answer_${i}`];
-            option.className = "option";
+            option.className =
+                "option bg-[#f9f9f9] p-3.75 relative font-bold hover:bg-[#cbcbcb] hover:transition";
             option.textContent = optionText;
             options.appendChild(option);
             // Highlight the clicked option and deselect others
             option.addEventListener("click", () => {
                 let allOptions = document.querySelectorAll(".option");
                 allOptions.forEach((opt) => {
-                    opt.classList.remove("selected");
+                    opt.classList.remove("text-[#0075ff]");
                 });
-                option.classList.add("selected");
+                option.classList.add("text-[#0075ff]");
             });
         }
     }
@@ -81,10 +82,12 @@ function addQuestionData(question, totalQuestions) {
 function createBullets(count) {
     for (let i = 0; i < count; i++) {
         let bullet = document.createElement("span");
+        bullet.className = "rounded-[50%] w-6.25 h-6.25 bg-[#dfdfdf]";
         spansDiv.appendChild(bullet);
         // Mark the first bullet as active on start
         if (i === 0) {
-            bullet.className = "active";
+            bullet.classList.remove("bg-[#dfdfdf]");
+            bullet.classList.add("bg-[#0075ff]");
         }
     }
 }
@@ -118,7 +121,8 @@ function handleBullets() {
     let bullets = document.querySelectorAll(".bullets .spans span");
     for (let i = 0; i < bullets.length; i++) {
         if (i === questionNumber) {
-            bullets[i].classList.add("active");
+            bullets[i].classList.remove("bg-[#dfdfdf]");
+            bullets[i].classList.add("bg-[#0075ff]");
         }
     }
 }
