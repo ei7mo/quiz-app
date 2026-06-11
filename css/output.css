@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -185,12 +184,6 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
-  .m-5 {
-    margin: calc(var(--spacing) * 5);
-  }
-  .mt-3 {
-    margin-top: calc(var(--spacing) * 3);
-  }
   .mt-3\.75 {
     margin-top: calc(var(--spacing) * 3.75);
   }
@@ -224,20 +217,11 @@
   .inline-block {
     display: inline-block;
   }
-  .table {
-    display: table;
-  }
-  .h-6 {
-    height: calc(var(--spacing) * 6);
-  }
   .h-6\.25 {
     height: calc(var(--spacing) * 6.25);
   }
   .h-full {
     height: 100%;
-  }
-  .w-6 {
-    width: calc(var(--spacing) * 6);
   }
   .w-6\.25 {
     width: calc(var(--spacing) * 6.25);
@@ -248,14 +232,8 @@
   .w-screen {
     width: 100vw;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .items-center {
     align-items: center;
@@ -265,9 +243,6 @@
   }
   .justify-center {
     justify-content: center;
-  }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
   }
   .gap-1\.25 {
     gap: calc(var(--spacing) * 1.25);
@@ -286,11 +261,6 @@
       border-color: #dfdfdf;
     }
   }
-  .divide-gray-300 {
-    :where(& > :not(:last-child)) {
-      border-color: var(--color-gray-300);
-    }
-  }
   .rounded-\[5px\] {
     border-radius: 5px;
   }
@@ -299,10 +269,6 @@
   }
   .rounded-\[50\%\] {
     border-radius: 50%;
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .border-t {
     border-top-style: var(--tw-border-style);
@@ -327,9 +293,6 @@
   .bg-\[\#f9f9f9\] {
     background-color: #f9f9f9;
   }
-  .bg-black {
-    background-color: var(--color-black);
-  }
   .bg-black\/50 {
     background-color: color-mix(in srgb, #000 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -339,50 +302,26 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .p-3 {
-    padding: calc(var(--spacing) * 3);
-  }
   .p-3\.75 {
     padding: calc(var(--spacing) * 3.75);
   }
   .p-5 {
     padding: calc(var(--spacing) * 5);
   }
-  .p-\[15px\] {
-    padding: 15px;
-  }
-  .p-\[30px\] {
-    padding: 30px;
-  }
-  .pt-3 {
-    padding-top: calc(var(--spacing) * 3);
+  .p-7\.5 {
+    padding: calc(var(--spacing) * 7.5);
   }
   .pt-3\.75 {
     padding-top: calc(var(--spacing) * 3.75);
   }
-  .pr-7 {
-    padding-right: calc(var(--spacing) * 7);
-  }
   .pr-7\.5 {
     padding-right: calc(var(--spacing) * 7.5);
-  }
-  .pr-\[30px\] {
-    padding-right: 30px;
-  }
-  .pb-3 {
-    padding-bottom: calc(var(--spacing) * 3);
   }
   .pb-3\.75 {
     padding-bottom: calc(var(--spacing) * 3.75);
   }
-  .pl-7 {
-    padding-left: calc(var(--spacing) * 7);
-  }
   .pl-7\.5 {
     padding-left: calc(var(--spacing) * 7.5);
-  }
-  .pl-\[30px\] {
-    padding-left: 30px;
   }
   .text-center {
     text-align: center;
@@ -399,13 +338,6 @@
   }
   .text-white {
     color: var(--color-white);
-  }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
   }
   .hover\:bg-\[\#0056b3\] {
     &:hover {
@@ -430,11 +362,6 @@
       }
     }
   }
-  .\[\&\>\:not\(\:last-child\)\]\:border-b-\[\#dfdfdf\] {
-    &>:not(:last-child) {
-      border-bottom-color: #dfdfdf;
-    }
-  }
 }
 @property --tw-divide-y-reverse {
   syntax: "*";
@@ -450,18 +377,12 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-divide-y-reverse: 0;
       --tw-border-style: solid;
       --tw-font-weight: initial;
-      --tw-outline-style: solid;
     }
   }
 }
