@@ -4,31 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
-    <link rel="stylesheet" href="main.css" />
+    <!-- <link rel="stylesheet" href="main.css" /> -->
+    <link rel="stylesheet" href="css/output.css" />
   </head>
   <body>
-    <div class="popup">
-      <div class="popup-content">
+    <div
+      class="popup fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center"
+    >
+      <div class="popup-content bg-white p-[30px] rounded-[10px] text-center">
         <p>What category do you want to take the quiz for?</p>
-        <button id="html" data-category="HTML">HTML</button>
-        <button id="css" data-category="CSS">CSS</button>
-        <button id="javascript" data-category="JavaScript">JavaScript</button>
+        <button
+          id="html"
+          class="bg-[#0075ff] text-white border-none pt-3.75 pr-7.5 pb-3.75 pl-7.5 rounded-[5px] cursor-pointer"
+          data-category="HTML"
+        >
+          HTML
+        </button>
+        <button
+          id="css"
+          class="bg-[#0075ff] text-white border-none pt-3.75 pr-7.5 pb-3.75 pl-7.5 rounded-[5px] cursor-pointer"
+          data-category="CSS"
+        >
+          CSS
+        </button>
+        <button
+          id="javascript"
+          class="bg-[#0075ff] text-white border-none pt-3.75 pr-7.5 pb-3.75 pl-7.5 rounded-[5px] cursor-pointer"
+          data-category="JavaScript"
+        >
+          JavaScript
+        </button>
       </div>
     </div>
-    <div class="quiz-app">
-      <div class="quiz-info">
+    <div
+      class="quiz-app mt-5 mb-5 ml-auto mr-auto w-screen bg-[#f8f8f8] p-3.75"
+    >
+      <div class="quiz-info flex justify-between bg-white p-5">
         <div class="category">Category: <span></span></div>
         <div class="count">Questions count: <span></span></div>
       </div>
-      <div class="quiz-area">
-        <div class="options"></div>
+      <div class="quiz-area bg-white p-5 mt-3.75">
+        <div class="options mt-3.75 divide-y divide-[#dfdfdf]"></div>
       </div>
-      <button class="submit-btn">Submit Answer</button>
-      <div class="bullets">
-        <div class="spans"></div>
+      <button
+        class="submit-btn bg-[#0075ff] text-white w-full p-5 rounded-[10px] border-none font-bold mt-3.75 text-[15px] cursor-pointer hover:bg-[#0056b3] hover:transition"
+      >
+        Submit Answer
+      </button>
+      <div
+        class="bullets mt-3.75 bg-white flex justify-between items-center p-5 border-t border-[#dfdfdf]"
+      >
+        <div class="spans flex gap-1.25"></div>
         <div class="countdown"></div>
       </div>
-      <div class="result">Right: <span></span></div>
+      <div class="result bg-white p-5 mt-3.75 hidden">Right: <span></span></div>
     </div>
     <script type="module" src="main.js"></script>
   </body>
