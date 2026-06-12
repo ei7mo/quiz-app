@@ -11,7 +11,7 @@ Built as a learning project to practice TypeScript and fetching data from json f
 
 ### Links
 
-- [Live Site URL](https://ei7mo.github.io/quiz-app/)
+- [Live Site URL](https://quizz-app-ei7.netlify.app/)
 
 ## My process
 
