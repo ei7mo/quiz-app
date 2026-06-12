@@ -18,7 +18,7 @@ let rightAnswers = 0;
 categoryButtons.forEach((button) => {
     button.addEventListener("click", () => {
         category = button.dataset.category;
-        categorySpan.textContent = category;
+        categorySpan.textContent = category.toLowerCase();
         getQuestions(category);
         popup.remove();
     });
@@ -72,8 +72,10 @@ function addQuestionData(question, totalQuestions) {
                 let allOptions = document.querySelectorAll(".option");
                 allOptions.forEach((opt) => {
                     opt.classList.remove("text-[#0075ff]");
+                    opt.classList.remove("selected");
                 });
                 option.classList.add("text-[#0075ff]");
+                option.classList.add("selected");
             });
         }
     }
